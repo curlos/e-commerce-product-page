@@ -1,5 +1,19 @@
 import React from 'react';
-import { Box, Flex, Image } from '@chakra-ui/react';
+import { 
+  Box, 
+  Flex, 
+  Image,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  MenuItemOption,
+  MenuGroup,
+  MenuOptionGroup,
+  MenuDivider,
+  Button
+} from '@chakra-ui/react';
+import { ChevronDownIcon } from '@chakra-ui/icons'
 
 const Navbar = () => {
 
@@ -17,10 +31,26 @@ const Navbar = () => {
         </Flex>
       </Flex>
 
-      <Flex align="center" gap="30px">
-        <Image src="/images/icon-cart.svg" alt="" />
-        <Image src="/images/image-avatar.png" alt="" borderRadius="50%" h="50px"/>
-      </Flex>
+      <Menu>
+        {({ isOpen }) => (
+          <>
+            <MenuButton isActive={isOpen} as={Button} py="30px" bgColor="transparent" _focus={{ bgColor: "transparent" }} _active={{ bgColor: "transparent" }} _hover={{ bgColor: "transparent" }}>
+              <Flex align="center" gap="30px">
+                <Image src="/images/icon-cart.svg" alt="" color="blue" />
+                <Box borderRadius="50%" border="2px" borderColor={isOpen ? 'orange.400' : 'transparent'}>
+                  <Image src="/images/image-avatar.png" alt="" borderRadius="50%" h="50px" />
+                </Box>
+              </Flex>
+            </MenuButton>
+            <MenuList boxShadow="2xl" border="none" outline="none">
+              
+              <MenuItem>Cart Item</MenuItem>
+            </MenuList>
+          </>
+        )}
+      </Menu>
+
+      
     </Flex>
   );
 };

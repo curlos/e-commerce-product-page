@@ -13,6 +13,11 @@ const Product = () => {
 
   const [selectedImage, setSelectedImage] = useState(Object.values(images)[0])
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const [quantity, setQuantity] = useState(1)
+
+  const handleAddToCart = () => {
+    
+  }
 
   console.log(selectedImage)
 
@@ -48,14 +53,18 @@ const Product = () => {
 
           <Grid templateColumns="2fr 3fr" gap="10px">
             <Flex justify="space-between" align="center" p="10px" bgColor="gray.100" borderRadius="10px">
-              <Image src="images/icon-minus.svg" alt="" />
-              <Text fontWeight="bold">0</Text>
-              <Image src="images/icon-plus.svg" alt="" />
+              <Image src="images/icon-minus.svg" alt="" cursor="pointer" onClick={() => {
+                if (quantity > 1) {
+                  setQuantity(quantity - 1)
+                }
+              }}/>
+              <Text fontWeight="bold">{quantity}</Text>
+              <Image src="images/icon-plus.svg" alt="" cursor="pointer" onClick={() => setQuantity(quantity + 1)}/>
             </Flex>
 
             <Flex justify="center" align="center" gap="10px" bgColor="orange.400" color="white" borderRadius="10px" boxShadow="xl">
               <Image src="images/icon-cart.svg" alt="" filter="invert(100%) sepia(100%) saturate(2%) hue-rotate(72deg) brightness(106%) contrast(101%)"/>
-              <Text fontWeight="bold" fontSize="14px">Add to cart</Text>
+              <Text fontWeight="bold" fontSize="14px" onClick={handleAddToCart}>Add to cart</Text>
             </Flex>
           </Grid>
         </Box>
