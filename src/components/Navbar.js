@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Text, Flex, Grid, Image } from '@chakra-ui/react';
+import { Box, Flex, Image } from '@chakra-ui/react';
 
 const Navbar = () => {
 
