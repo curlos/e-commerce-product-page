@@ -19,22 +19,18 @@ const Navbar = ({ cart, handleRemoveFromCart }) => {
 
   console.log(cart)
   
-  // const getTotalPrice = () => {
-  //   const totalQuantities = cart.reduce((a, b) => ({ totalQuantity: Number(a.quantity) + Number(b.quantity) }))
-
-  //   console.log(totalQuantities)
-  // }
-
-  // console.log(getTotalPrice())
+  const getTotalPrice = (quantity, price) => {
+    return quantity * price
+  }
 
   return (
-    <Flex justify="space-between" align="center" py={8} borderBottom="1px" borderColor="gray.200">
+    <Flex justify="space-between" align="center" borderBottom="1px" borderColor="gray.200">
       <Flex align="center" gap={7}>
-        <Image src='/images/logo.svg' alt='Sneakers Logo' />
+        <Image src='/images/logo.svg' alt='Sneakers Logo' cursor="pointer" />
         
         <Flex justify="space-between" align="center" color="gray.500" gap={5} fontSize="15px">
           {CATEGORIES.map((category) => (
-            <Box cursor="pointer">{category}</Box>
+            <Box cursor="pointer" py={8} borderBottom="4px" borderColor="transparent" _hover={{ borderColor: "orange.400"}}>{category}</Box>
           ))}
         </Flex>
       </Flex>
@@ -68,7 +64,7 @@ const Navbar = ({ cart, handleRemoveFromCart }) => {
                         <Text color="gray.500">{item.name}</Text>
                         <Flex align="center" gap="8px" color="gray.500">
                           <Text>${item.onSalePrice}.00 x {item.quantity}</Text>
-                          <Text color="black" fontWeight="bold">$375.00</Text>
+                          <Text color="black" fontWeight="bold">${getTotalPrice(item.quantity, item.onSalePrice)}.00</Text>
                         </Flex>
                       </Box>
                     </Flex>

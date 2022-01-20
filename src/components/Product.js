@@ -52,7 +52,7 @@ const Product = ({ handleAddToCart }) => {
           </Grid>
         </Box>
 
-        <Grid templateRows="2fr 1fr" p="20px" ps="50px">
+        <Box p="20px" ps="50px">
           <Box>
             <Text color="orange.300" fontWeight="semibold" letterSpacing={1}>SNEAKER COMPANY</Text>
 
@@ -62,12 +62,14 @@ const Product = ({ handleAddToCart }) => {
           </Box>
 
           <Box>
-            <Flex align="center" gap="10px">
-              <Text fontWeight="bold" fontSize="26px">$125.00</Text>
-              <Text fontWeight="bold" fontSize="16px" bgColor="orange.100" color="orange.400" borderRadius="5px" p="2px" px="10px">50%</Text>
-            </Flex>
+            <Box pt="15px" pb="30px">
+              <Flex align="center" gap="10px">
+                <Text fontWeight="bold" fontSize="26px">$125.00</Text>
+                <Text fontWeight="bold" fontSize="16px" bgColor="orange.100" color="orange.400" borderRadius="5px" p="2px" px="10px">50%</Text>
+              </Flex>
 
-            <Text fontWeight="bold" fontSize="16px" color="gray.300" textDecoration={'line-through'}>$250.00</Text>
+              <Text fontWeight="bold" fontSize="16px" color="gray.300" textDecoration={'line-through'}>$250.00</Text>
+            </Box>
 
             <Grid templateColumns="2fr 3fr" gap="10px">
               <Flex justify="space-between" align="center" p="10px" bgColor="gray.100" borderRadius="10px">
@@ -82,7 +84,7 @@ const Product = ({ handleAddToCart }) => {
               </Flex>
             </Grid>
           </Box>
-        </Grid>
+        </Box>
       </Grid>
 
       {isOpen ? <Carousel isOpen={isOpen} onOpen={onOpen} onClose={onClose} images={images} /> : null}
