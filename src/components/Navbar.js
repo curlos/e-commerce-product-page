@@ -8,16 +8,19 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
-  Button
+  Button,
+  useColorMode,
+  useColorModeValue
 } from '@chakra-ui/react';
-import { ChevronDownIcon } from '@chakra-ui/icons'
+import { ChevronDownIcon, MoonIcon, SunIcon } from '@chakra-ui/icons'
 
 const CATEGORIES = ['Collections', 'Men', 'Women', 'About', 'Contact']
 
 const Navbar = ({ cart, handleRemoveFromCart }) => {
-  
 
-  console.log(cart)
+  const { colorMode, toggleColorMode } = useColorMode()
+  const blackWhiteColor = useColorModeValue('black', 'white')
+  const categoryColor = useColorModeValue('gray.500', 'white')
   
   const getTotalPrice = (quantity, price) => {
     return quantity * price
@@ -26,9 +29,13 @@ const Navbar = ({ cart, handleRemoveFromCart }) => {
   return (
     <Flex justify="space-between" align="center" borderBottom="1px" borderColor="gray.200">
       <Flex align="center" gap={7}>
-        <Image src='/images/logo.svg' alt='Sneakers Logo' cursor="pointer" />
+        <Image src='/images/logo.svg' alt='Sneakers Logo' cursor="pointer" color={blackWhiteColor}/>
+
+        <Button onClick={toggleColorMode} bgColor="transparent">
+          {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+        </Button>
         
-        <Flex justify="space-between" align="center" color="gray.500" gap={5} fontSize="15px">
+        <Flex justify="space-between" align="center" color={categoryColor} gap={5} fontSize="15px">
           {CATEGORIES.map((category) => (
             <Box cursor="pointer" py={8} borderBottom="4px" borderColor="transparent" _hover={{ borderColor: "orange.400"}}>{category}</Box>
           ))}
@@ -61,10 +68,10 @@ const Navbar = ({ cart, handleRemoveFromCart }) => {
                     <Flex align="center" gap="10px">
                       <Image src={Object.keys(item.images)[0]} alt={item.name} h="50px" borderRadius="5px"/>
                       <Box>
-                        <Text color="gray.500">{item.name}</Text>
-                        <Flex align="center" gap="8px" color="gray.500">
+                        <Text color={categoryColor}>{item.name}</Text>
+                        <Flex align="center" gap="8px" color={categoryColor}>
                           <Text>${item.onSalePrice}.00 x {item.quantity}</Text>
-                          <Text color="black" fontWeight="bold">${getTotalPrice(item.quantity, item.onSalePrice)}.00</Text>
+                          <Text color={blackWhiteColor} fontWeight="bold">${getTotalPrice(item.quantity, item.onSalePrice)}.00</Text>
                         </Flex>
                       </Box>
                     </Flex>

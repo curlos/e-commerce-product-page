@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Text, Flex, Grid, Image, useDisclosure } from '@chakra-ui/react';
+import { Box, Text, Flex, Grid, Image, useDisclosure, useColorModeValue } from '@chakra-ui/react';
 import Carousel from './Carousel';
 
 const images = {
@@ -34,7 +34,7 @@ const Product = ({ handleAddToCart }) => {
   }
   
 
-  console.log(selectedImage)
+  const grayBgColor = useColorModeValue('gray.100', 'gray.700')
 
 
   return (
@@ -72,7 +72,7 @@ const Product = ({ handleAddToCart }) => {
             </Box>
 
             <Grid templateColumns="2fr 3fr" gap="10px">
-              <Flex justify="space-between" align="center" p="10px" bgColor="gray.100" borderRadius="10px">
+              <Flex justify="space-between" align="center" p="10px" bgColor={grayBgColor} borderRadius="10px">
                 <Image src="images/icon-minus.svg" alt="" cursor="pointer" onClick={handleDecrement}/>
                 <Text fontWeight="bold">{product.quantity}</Text>
                 <Image src="images/icon-plus.svg" alt="" cursor="pointer" onClick={handleIncrement}/>
