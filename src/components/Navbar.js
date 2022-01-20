@@ -1,21 +1,31 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Box, 
   Flex, 
   Image,
+  Text,
   Menu,
   MenuButton,
   MenuList,
   MenuItem,
-  MenuItemOption,
-  MenuGroup,
-  MenuOptionGroup,
-  MenuDivider,
   Button
 } from '@chakra-ui/react';
 import { ChevronDownIcon } from '@chakra-ui/icons'
 
-const Navbar = () => {
+const CATEGORIES = ['Collections', 'Men', 'Women', 'About', 'Contact']
+
+const Navbar = ({ cart, handleRemoveFromCart }) => {
+  
+
+  console.log(cart)
+  
+  // const getTotalPrice = () => {
+  //   const totalQuantities = cart.reduce((a, b) => ({ totalQuantity: Number(a.quantity) + Number(b.quantity) }))
+
+  //   console.log(totalQuantities)
+  // }
+
+  // console.log(getTotalPrice())
 
   return (
     <Flex justify="space-between" align="center" py={8} borderBottom="1px" borderColor="gray.200">
@@ -23,11 +33,9 @@ const Navbar = () => {
         <Image src='/images/logo.svg' alt='Sneakers Logo' />
         
         <Flex justify="space-between" align="center" color="gray.500" gap={5} fontSize="15px">
-          <Box>Collections</Box>
-          <Box>Men</Box>
-          <Box>Women</Box>
-          <Box>About</Box>
-          <Box>Contact</Box>
+          {CATEGORIES.map((category) => (
+            <Box cursor="pointer">{category}</Box>
+          ))}
         </Flex>
       </Flex>
 
@@ -36,15 +44,47 @@ const Navbar = () => {
           <>
             <MenuButton isActive={isOpen} as={Button} py="30px" bgColor="transparent" _focus={{ bgColor: "transparent" }} _active={{ bgColor: "transparent" }} _hover={{ bgColor: "transparent" }}>
               <Flex align="center" gap="30px">
-                <Image src="/images/icon-cart.svg" alt="" color="blue" />
+                <Flex align="start">
+                  <Image src="/images/icon-cart.svg" alt="" color="blue" />
+                  {cart.length ? (
+                    <Text fontSize="12px" color="white" bgColor="orange.400" borderRadius="5px" px="2px" ml="-12px" mt="-7px">{cart.length}</Text>
+                  ) : null}
+                </Flex>
                 <Box borderRadius="50%" border="2px" borderColor={isOpen ? 'orange.400' : 'transparent'}>
                   <Image src="/images/image-avatar.png" alt="" borderRadius="50%" h="50px" />
                 </Box>
               </Flex>
             </MenuButton>
-            <MenuList boxShadow="2xl" border="none" outline="none">
+            <MenuList boxShadow="2xl" border="none" outline="none" w="350px">
+
+              <Box px="20px" py="10px" pb="20px" fontWeight="bold" borderBottom="1px" borderColor="gray.200">Cart</Box>
               
-              <MenuItem>Cart Item</MenuItem>
+              {cart.length > 0 && cart.map((item, index) => {
+                return (
+                  <MenuItem d="flex" justifyContent="space-between" alignItems="center" px="20px">
+                    <Flex align="center" gap="10px">
+                      <Image src={Object.keys(item.images)[0]} alt={item.name} h="50px" borderRadius="5px"/>
+                      <Box>
+                        <Text color="gray.500">{item.name}</Text>
+                        <Flex align="center" gap="8px" color="gray.500">
+                          <Text>${item.onSalePrice}.00 x {item.quantity}</Text>
+                          <Text color="black" fontWeight="bold">$375.00</Text>
+                        </Flex>
+                      </Box>
+                    </Flex>
+
+                    <Image src="images/icon-delete.svg" alt="Delete Icon" onClick={() => handleRemoveFromCart(index)} _hover={{ color: 'red' }}/>
+                  </MenuItem>
+                )
+              })}
+
+              {cart.length === 0 && (
+                <Box>Your cart is empty.</Box>
+              )}
+
+              <Box p="20px">
+                <Button bgColor="orange.400" color="white" w="100%" p="20px">Checkout</Button>
+              </Box>
             </MenuList>
           </>
         )}
