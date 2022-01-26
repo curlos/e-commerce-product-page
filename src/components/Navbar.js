@@ -21,6 +21,7 @@ const Navbar = ({ cart, handleRemoveFromCart }) => {
   const { colorMode, toggleColorMode } = useColorMode()
   const blackWhiteColor = useColorModeValue('black', 'white')
   const categoryColor = useColorModeValue('gray.500', 'white')
+  const logoColor = useColorModeValue('transparent', 'gray.600')
   
   const getTotalPrice = (quantity, price) => {
     return quantity * price
@@ -29,17 +30,21 @@ const Navbar = ({ cart, handleRemoveFromCart }) => {
   return (
     <Flex justify="space-between" align="center" borderBottom="1px" borderColor="gray.200">
       <Flex align="center" gap={7}>
-        <Image src='/images/logo.svg' alt='Sneakers Logo' cursor="pointer" color={blackWhiteColor}/>
+        <Image src='/images/logo.svg' alt='Sneakers Logo' cursor="pointer" bgColor={logoColor} borderRadius="10px" p="5px"/>
 
         <Button onClick={toggleColorMode} bgColor="transparent">
           {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
         </Button>
+
+        <Box d={"none"}>
+          <Flex justify="space-between" align="center" color={categoryColor} gap={5} fontSize="15px">
+            {CATEGORIES.map((category) => (
+              <Box cursor="pointer" py={8} borderBottom="4px" borderColor="transparent" _hover={{ borderColor: "orange.400"}}>{category}</Box>
+            ))}
+          </Flex>
+        </Box>
         
-        <Flex justify="space-between" align="center" color={categoryColor} gap={5} fontSize="15px">
-          {CATEGORIES.map((category) => (
-            <Box cursor="pointer" py={8} borderBottom="4px" borderColor="transparent" _hover={{ borderColor: "orange.400"}}>{category}</Box>
-          ))}
-        </Flex>
+        
       </Flex>
 
       <Menu>
@@ -54,7 +59,7 @@ const Navbar = ({ cart, handleRemoveFromCart }) => {
                   ) : null}
                 </Flex>
                 <Box borderRadius="50%" border="2px" borderColor={isOpen ? 'orange.400' : 'transparent'}>
-                  <Image src="/images/image-avatar.png" alt="" borderRadius="50%" h="50px" />
+                  <Image src="/images/image-avatar.png" alt="" borderRadius="50%" h="50px" w="50px" />
                 </Box>
               </Flex>
             </MenuButton>

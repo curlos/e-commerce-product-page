@@ -22,7 +22,7 @@ const App = () => {
   console.log(cart)
 
   return (
-    <Box w="100vw" maxW="100%" minH="100vh" px='60px'>
+    <Box w="100vw" maxW="100%" minH="100vh" px={{ base: '10px', lg: '60px'}}>
       <Navbar cart={cart} handleRemoveFromCart={handleRemoveFromCart}/>
       <Product handleAddToCart={handleAddToCart} />
     </Box>

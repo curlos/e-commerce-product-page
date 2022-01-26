@@ -39,8 +39,8 @@ const Product = ({ handleAddToCart }) => {
 
   return (
     <Box>
-      <Grid p="20px" pt="70px" templateColumns="2fr 3fr">
-        <Box w="100%">
+      <Grid p="20px" pt="70px" templateColumns="2fr 3fr" d={{ base: 'block', lg: 'grid' }}>
+        <Box w="100%" mb={{ base: '20px', lg: '0px' }}>
           <Image src={selectedImage} alt="" borderRadius="15px" cursor="pointer" onClick={onOpen} />
 
           <Grid gap="10px" w="100%" templateColumns="repeat(4, 1fr)" mt="20px">
@@ -52,7 +52,7 @@ const Product = ({ handleAddToCart }) => {
           </Grid>
         </Box>
 
-        <Box p="20px" ps="50px">
+        <Box p={{ base: '0px', lg: '20px'}} ps={{ base: '0px', lg: '50px'}}>
           <Box>
             <Text color="orange.300" fontWeight="semibold" letterSpacing={1}>SNEAKER COMPANY</Text>
 
